@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 import styles from "./page.module.css";
 
 const steps = [
@@ -74,8 +75,11 @@ const applications = [
 ];
 
 const PainResonancePage = () => {
+  const [isDark, setIsDark] = useState(false);
+  const pageClassName = [styles.page, isDark ? styles.dark : ""].filter(Boolean).join(" ");
+
   return (
-    <div className={styles.page}>
+    <div className={pageClassName}>
       <header className={styles.hero}>
         <p className={styles.kicker}>Pain Resonance Index</p>
         <h1 className={styles.title}>Measuring pain through coherence and resonance</h1>
@@ -87,6 +91,13 @@ const PainResonancePage = () => {
           <Link className={styles.actionLink} href="/">
             ← Back to samples
           </Link>
+          <button
+            type="button"
+            className={styles.actionLink}
+            onClick={() => setIsDark((prev) => !prev)}
+          >
+            {isDark ? "Switch to light mode" : "Switch to dark mode"}
+          </button>
           <span className={styles.actionNote}>Designed for non-verbal and cognitively impaired patients.</span>
         </div>
       </header>
